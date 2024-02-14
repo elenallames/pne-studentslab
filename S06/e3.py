@@ -1,3 +1,11 @@
+def generate_seqs(pattern, number):
+
+
+
+
+
+
+
 seq_list1 = generate_seqs("A", 3)
 seq_list2 = generate_seqs("AC", 5)
 

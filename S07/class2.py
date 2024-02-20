@@ -3,8 +3,9 @@ class Car:
         self.car_brand = brand
         self.speed = speed
 
-    def set_speed(self, brand):
+    def set_speed(self, speed):
         self.speed = speed
+
 class Ferrari(Car):
     pass
 

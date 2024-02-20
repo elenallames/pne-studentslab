@@ -1,5 +1,4 @@
 #exercise 2
-
 class Seq:
     def __init__(self, strbases):
         self.strbases = strbases
@@ -14,9 +13,8 @@ class Seq:
 def print_seqs(seq_list):
     n = 0
     for seq in seq_list:
-        print(f"Sequence", n, ": Length:", seq.len(), seq)
+        print(f"Sequence", n, ": (Length:", seq.len(), ")", seq)
         n += 1
 
-
 seq_list = [Seq("ACT"), Seq("GATA"), Seq("CAGATA")]
-print(print_seqs(seq_list))
+print_seqs(seq_list)

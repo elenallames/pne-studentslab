@@ -1,4 +1,8 @@
 #Exercise1
-from seq0 import *
-exercise1 = seq_ping()
+# import Seq0
+from Seq0 import *
+
+print("Testing the seq_ping() function")
+# Seq0.seq_ping()
+seq_ping()
 

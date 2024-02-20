@@ -1,30 +1,60 @@
 from pathlib import Path
+
+BASES = ["A", "C", "T", "G"]
+BASES_COMPLEMENT = {"A": "T", "T": "A", "C": "G", "G": "C"}
+
+
 def seq_ping():
     print("OK")
 
+
 def seq_read_fasta(filename):
-    file_contents = Path(filename).read_text()
-    index = file_contents.find("\n")
-    list_contents = (file_contents[index:]).replace("\n", "")
-    print("The first 20 bases are: ")
-    print(list_contents[:20])
+    file_content = Path(filename).read_text()
+    lines = file_content.splitlines()
+    body = lines[1:]
+    # "".join(body) is the same as the following for loop
+    dna_sequence = ""
+    for line in body:
+        dna_sequence += line  # dna_sequence = dna_sequence + line
+    return dna_sequence
+
 
 def seq_len(seq):
-    FOLDER = "../sequences/"
-    FILENAME = seq + ".txt"
-    file_contents = Path(FOLDER + FILENAME).read_text()
-    index = file_contents.find("\n")
-    list_contents = (file_contents[index:]).replace("\n", "")
-    print("Gene", seq + "-> Length: ", len(list_contents))
+    return len(seq)
+
 
 def seq_count_base(seq, base):
-    genes = ["ADA", "U5", "FRAT1", "FXN"]
-    bases = ["A", "T", "C", "G"]
-    for i in genes:
-        for b in bases:
-            f = SEQUENCES + g + (".txt")
-            bases = seq.read(f)
-            total = seq.read(bases, b)
+    return seq.count(base)
+
+
+def seq_count(seq):
+    bases_appearances = {}
+    for base in BASES:
+        bases_appearances[base] = seq_count_base(seq, base)
+    return bases_appearances
+
+
+def seq_reverse(seq, n):
+    seq_n = seq[:n]
+    return seq_n[::-1]
+
+
+def seq_complement(seq):
+    complement = ""
+    for base in seq:
+        complement += BASES_COMPLEMENT[base]
+    return complement
+    # complement = ""
+    # for base in seq:
+    #     if base == "A":
+    #         complement += "T"
+    #     elif base == "T":
+    #         complement += "A"
+    #     elif base == "C":
+    #         complement += "G"
+    #     elif base == "G":
+    #         complement += "C"
+    # return complement
 
 
 

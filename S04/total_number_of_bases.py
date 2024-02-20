@@ -1,12 +1,16 @@
 from pathlib import Path
 
-# -- Constant with the new of the file to open
-FILENAME = "sequences/ADA.fa"
+file_name = input("File's name: ")
 
-# -- Open and read the file
-file_contents = Path(FILENAME).read_text()
-
-
-
-total_number_of_bases = len(list_contents)
-print(total_number_of_bases)
+try:
+    file_contents = Path(file_name).read_text()
+    lines = file_contents.splitlines()
+    body = lines[1:]
+    total = 0
+    for line in body:
+        total += len(line)
+    print(f"Total number of bases of the {file_name} file: {total}")
+except FileNotFoundError:
+    print(f"[ERROR]: file '{file_name}' not found")
+except IndexError:
+    print(f"[ERROR]: file '{file_name}' is empty")

@@ -12,9 +12,3 @@ except FileNotFoundError:
 except IndexError:
     print(f"[ERROR]: file '{file_name}' is empty")
 
-#another way to do it
-#from pathlib import Path
-#FILENAME = "sequences/RNU6_269P.fa"
-#file_contents = Path(FILENAME).read_text()
-#list_contents = file_contents.split("\n")
-#print(list_contents[0])

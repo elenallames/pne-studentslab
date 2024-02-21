@@ -1,5 +1,4 @@
-from Seq0 import *
-
+from Seq0 import
 seq1 = "ATTCCCGGGG"
 
 print(f"Seq:    {seq1}")
@@ -13,7 +12,7 @@ print(f"    G: {seq_count_base(seq1, 'G')}")
 
 def seq_count_base(sequence, base=None):
     # code
-def seq_len(seq=None):
+def seq_len(seq=None)
    # code
    # -- Check that the sequence is valid
    seq_check(seq1)

@@ -1,7 +1,7 @@
 import os
 from Seq0 import *
 
-GENES = ["U5", "ADA", "FRAT1", "FXN"]
+GENES = ["U5", "ADA.txt", "FRAT1", "FXN"]
 
 for gene in GENES:
     filename = os.path.join("..", "sequences", gene + ".txt")

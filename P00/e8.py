@@ -13,7 +13,7 @@ def most_frequent_base(dna_sequence):
     return max_base
 
 
-GENES = ["U5", "ADA.txt", "FRAT1", "FXN"]
+GENES = ["U5", "ADA", "FRAT1", "FXN"]
 BASES = ["A", "C", "T", "G"]
 
 for gene in GENES:

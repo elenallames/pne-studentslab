@@ -1,7 +1,6 @@
 #Exercise3
 import os
 from Seq0 import *
-
 GENES = ["U5", "ADA.txt", "FRAT1", "FXN"]
 
 for gene in GENES:

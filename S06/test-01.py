@@ -1,4 +1,5 @@
-from Seq0 import
+from Seq0 import *
+
 seq1 = "ATTCCCGGGG"
 
 print(f"Seq:    {seq1}")
@@ -16,4 +17,5 @@ def seq_len(seq=None)
    # code
    # -- Check that the sequence is valid
    seq_check(seq1)
+
 

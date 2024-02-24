@@ -1,12 +1,6 @@
-import os
+#Exercise5
 from Seq0 import *
-
-GENES = ["U5", "ADA.txt", "FRAT1", "FXN"]
-
-for gene in GENES:
-    filename = os.path.join("..", "sequences", gene + ".txt")
-    try:
-        dna_sequence = seq_read_fasta(filename)
-        print(f"Gene {gene}: {seq_count(dna_sequence)}")
-    except FileNotFoundError:
-        print(f"[ERROR]: file '{filename}' not found")
+genes = ["U5", "ADA", "FRAT1", "FXN"]
+print("-----| Exercise 5 |------")
+for gene in genes:
+    print("Gene", gene, ":", seq_count(gene))

@@ -41,6 +41,35 @@ class Seq:
             bases_appearances[base] = self.count_base(base)
         return bases_appearances
 
+    def reverse(self):
+        if self.strbases == "NULL" or self.strbases == "ERROR":
+            return "ERROR"
+        else:
+            reverse = ''
+            seq = self.strbases
+            index = len(seq) - 1
+            while index >= 0:
+                reverse += seq[index]
+                index -= 1
+            return reverse
+
+    def complement(self):
+        complement = ""
+        if self.strbases == None:
+            return "NULL"
+        else:
+            for base in self.strbases:
+                if base == "A":
+                    complement += "T"
+                elif base == "G":
+                    complement += "C"
+                elif base == "C":
+                    complement += "G"
+                elif base == "T":
+                    complement += "A"
+                else:
+                    return "ERROR"
+        return complement
 
 class Gene(Seq):
     """This class is derived from the Seq Class

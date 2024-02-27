@@ -1,7 +1,12 @@
-from Seq1 import *
+# Exercise 3
 
-print("-----| Practice 1, Exercise 3 |------")
-s1 = Seq()
-s2 = Seq("ACTGA")
-s3 = Seq("Invalid sequence")
-print("Sequence 1:", s1, "\nSequence 2:", s2, "\nSequence 3:", s3)
+from seq import Seq
+PRACTICE = 1
+EXCERCISE = 3
+
+print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
+
+seq_list = [Seq(), Seq("ACTGA"), Seq("Invalid sequence")]
+for i, s in enumerate(seq_list):
+    print(f"Sequence {i + 1}: {s}")
+

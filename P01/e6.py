@@ -1,12 +1,12 @@
-from Seq1 import *
-print("-----| Practice 1, Exercise 6 |------")
-s1 = Seq()
-s2 = Seq("ACTGA")
-s3 = Seq("Invalid sequence")
+# Exercise 6
 
-print(f"Sequence", 1, ": (Length:", seq_len(s1), ")", s1)
-count_seq(s1)
-print(f"Sequence", 2, ": (Length:", seq_len(s2), ")", s2)
-count_seq(s2)
-print(f"Sequence", 3, ": (Length:", seq_len(s3), ")", s3)
-count_seq(s3)
+from seq import Seq
+
+PRACTICE = 1
+EXCERCISE = 6
+
+print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
+seq_list = [Seq(), Seq("ACTGA"), Seq("Invalid sequence")]
+for i, s in enumerate(seq_list):
+    print(f"Sequence {i + 1}: (Length: {s.len()}) {s}")
+    print(f"\tBases: {s.count()}")

@@ -1,7 +1,12 @@
-#Exercise1
-from Seq1 import *
-print("-----| Practice 1, Exercise 1 |------")
+# Exercise 1
 
-s1 = Seq("ACTGA")
+from seq import Seq
 
-print_seqs([s1])
+PRACTICE = 1
+EXCERCISE = 1
+
+print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
+s = Seq("ACTGA")
+print(f"Sequence 1: (Length: {s.len()}) {s}")
+
+

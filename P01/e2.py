@@ -1,6 +1,17 @@
-from Seq1 import *
-print("-----| Practice 1, Exercise 2 |------")
-s1 = Seq()
-s2 = Seq("TATAC")
+# Exercise 2
 
-print("Sequence 1:", s1, "\nSequence 2:", s2 )
+from seq import Seq
+
+PRACTICE = 1
+EXCERCISE = 2
+
+print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
+
+seq_list = [Seq(), Seq("TATAC")]
+for i, s in enumerate(seq_list):
+    print(f"Sequence {i + 1}: {s}")
+
+
+
+
+

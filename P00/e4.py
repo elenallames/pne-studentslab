@@ -1,10 +1,7 @@
-#Exercise4
+# Exercise 4
 from Seq0 import *
-print("-----| Exercise 4 |------")
-genes = ["ADA", "U5", "FRAT1", "FXN"]
-bases = ["A", "C", "T", "G"]
-for gene in genes:
-    print("Gene", gene, ":")
-    for base in bases:
-        seq_count_base(gene, base)
-    print()
+bases = ["A", "C", "G", "T"]
+ex_u5 = seq_count_base("U5", bases)
+ex_ada = seq_count_base("ADA", bases)
+ex_frat1 = seq_count_base("FRAT1", bases)
+ex_fxn = seq_count_base("FXN", bases)

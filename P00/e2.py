@@ -1,8 +1,4 @@
-#Exercise2
+# Exercise 2
 from Seq0 import *
-
-FOLDER = "./sequences/"
-FILENAME = "U5.txt"
-sequence = seq_read_fasta(FOLDER + FILENAME)
-
-
+list_contents = seq_read_fasta("U5")
+print(f"The first 20 bases are: {list_contents[:20]}")

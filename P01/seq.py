@@ -55,7 +55,7 @@ class Seq:
 
     def complement(self):
         complement = ""
-        if self.strbases == None:
+        if self.strbases is None:
             return "NULL"
         else:
             for base in self.strbases:
@@ -71,11 +71,13 @@ class Seq:
                     return "ERROR"
         return complement
 
+
 class Gene(Seq):
     """This class is derived from the Seq Class
            All the objects of class Gene will inherit
            the methods from the Seq class
         """
+
     def __init__(self, strbases, name=""):
         super().__init__(strbases)
         self.name = name

@@ -1,5 +1,3 @@
-#Exercise7
+# Exercise 7
 from Seq0 import *
-print("-----| Exercise 7 |------")
-print("Gene U5")
-seq_complement("U5")
+exercise7 = seq_complement("U5")

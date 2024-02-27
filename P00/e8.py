@@ -1,6 +1,6 @@
-#Exercise8
+# Exercise 8
 from Seq0 import *
-print("-----| Exercise 8 |------")
-genes = ["U5", "ADA", "FRAT1", "FXN"]
-for gene in genes:
-    most_freq_base(gene)
+exercise8_U5 = processing_the_genes("U5")
+exercise8_ADA = processing_the_genes("ADA")
+exercise8_frat1 = processing_the_genes("FRAT1")
+exercise8_fxn = processing_the_genes("FXN")

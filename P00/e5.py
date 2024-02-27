@@ -1,6 +1,6 @@
-#Exercise5
+# Exercise 5
 from Seq0 import *
-genes = ["U5", "ADA", "FRAT1", "FXN"]
-print("-----| Exercise 5 |------")
-for gene in genes:
-    print("Gene", gene, ":", seq_count(gene))
+ex_u5 = seq_count("U5")
+ex_ada = seq_count("ADA")
+ex_frat1 = seq_count("FRAT1")
+ex_fxn = seq_count("FXN")

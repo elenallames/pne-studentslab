@@ -71,6 +71,28 @@ class Seq:
                     return "ERROR"
         return complement
 
+    def read_fasta(self, filename):
+        from pathlib import Path
+
+        file_content = Path(filename).read_text()
+        lines = file_content.splitlines()
+        body = lines[1:]
+
+        dna_sequence = ""
+        for line in body:
+            dna_sequence += line  # dna_sequence = dna_sequence + line
+        self.strbases = dna_sequence
+
+    def max_base(self):
+        bases_dict = {}
+        for b in Seq.BASES:
+            bases_dict[b] = self.count_base(b)
+
+        most_frequent_base = max(bases_dict, key=bases_dict.get)
+        # the maximum is determined based on the values in the dictionary, but the key is the one returned
+
+        return most_frequent_base
+
 
 class Gene(Seq):
     """This class is derived from the Seq Class

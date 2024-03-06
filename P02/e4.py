@@ -1,24 +1,34 @@
 from Client0 import Client
-from seq import *
+from seq import Seq
 import os
+
 PRACTICE = 2
 EXERCISE = 4
+GENES = ["U5", "FRAT1", "ADA"]
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
-IP = "212.128.255.64"
+
+IP = "192.168.0.33"
 PORT = 8081
+
 c = Client(IP, PORT)
 print(c)
-s = Seq()
-GENES = ["U5", "FRAT1", "ADA"]
+
 for gene in GENES:
     filename = os.path.join("..", "sequences", gene + ".txt")
-    s.read_fasta(filename)
-    msg =(f"Sending {gene} Gene to the server...")
-    print(msg)
-    first_response = c.talk(msg)
-    print(f"From server: {first_response}")
-    msg2 = str(s)
-    print(f"To server: {msg2}")
-    second_response = c.talk(f"{msg2}")
-    print(f"From server: {second_response}")
+    try:
+        s = Seq()  # s.__str__()
+        s.read_fasta(filename)
+
+        msg = f"Sending {gene} Gene to the server..."
+        print(f"To Server: {msg}")
+        response = c.talk(msg)
+        print(f"From Server: {response}")
+
+        msg = str(s)    # msg = f"{s}" / s.__str__()
+        print(f"To Server: {msg}")
+        response = c.talk(msg)
+        print(f"From Server: {response}")
+
+    except FileNotFoundError:
+        print(f"[ERROR]: file ´{filename}´ not found")

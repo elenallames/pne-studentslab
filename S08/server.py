@@ -14,8 +14,7 @@ try:
     serversocket.bind((IP, PORT))
     # become a server socket
     # MAX_OPEN_REQUESTS connect requests before refusing outside connections
-    serversocket.listen(
-        MAX_OPEN_REQUESTS)  # have que a partir de esta instruccion se puedan conectar clientes(canal de comunicacion bidireccional)
+    serversocket.listen(MAX_OPEN_REQUESTS)  # have que a partir de esta instruccion se puedan conectar clientes(canal de comunicacion bidireccional)
     # determina cuantos clientes  a la vez pueden conectarse al servidor
 
     while True:

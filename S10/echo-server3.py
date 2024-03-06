@@ -2,7 +2,7 @@ import socket
 import termcolor
 # Configure the Server's IP and PORT
 PORT = 8081
-IP = "212.128.255.88" # this IP address is local, so only requests from the same machine are possible
+IP = "212.128.255.17"  # this IP address is local, so only requests from the same machine are possible
 
 MAX_OPEN_REQUESTS = 5
 

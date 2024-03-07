@@ -11,11 +11,11 @@ while flag:
     if total_letters == len(dna_sequence):
         flag = False
     else:
-        print("Then dna sequence is incorrect")
+        print("The dna sequence is incorrect")
 
 dna_sequence = input("Enter a sequence: ").upper()
 dna_sequence_length = len(dna_sequence)
-print(dna_sequence_length)
+print(f"Total length: {dna_sequence_length}")
 c_a = 0
 c_c = 0
 c_g = 0
@@ -29,4 +29,4 @@ for c in dna_sequence:
         c_t += 1
     elif c == "C":
         c_c += 1
-print("Total number of appearances: ", "A =", c_a, "C =", c_c, "G =", c_g, "T =", c_t)
+print("Total number of appearances: ", "\nA:", c_a, "\nC:", c_c, "\nG:", c_g, "\nT:", c_t)

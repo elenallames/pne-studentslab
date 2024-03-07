@@ -23,9 +23,8 @@ with open("dna_count_file.txt", "r") as f:
                     dict_dna['G'] = 1
                 else:
                     dict_dna['G'] += 1
-#total = dict_dna['A'] + dict_dna['C'] + dict_dna['T'] + dict_dna['G']
 for key in dict_dna:
-    total += dict_dna[key]
+    total += dict_dna[key]  # total = dict_dna['A'] + dict_dna['C'] + dict_dna['T'] + dict_dna['G']
 print("Introduce the sequence:", f, "\nTotal length:", total, "\n", dict_dna)
 
 

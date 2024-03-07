@@ -1,8 +1,8 @@
 sequence_dna = input("Enter a sequence: ")
-dic = {"A": 0 ,
-       "C": 0 ,
-       "G": 0 ,
-       "T": 0 }
+dic = {"A": 0,
+       "C": 0,
+       "G": 0,
+       "T": 0}
 len_sequence_dna = len(sequence_dna)
 for c in sequence_dna:
     if c == "A":
@@ -15,6 +15,4 @@ for c in sequence_dna:
         dic["T"] += 1
     else:
         pass
-print("Total length: ", len_sequence_dna, "\n",  dic)
-
-
+print("Total length: ", len_sequence_dna, "\n", dic)

@@ -1,7 +1,9 @@
 import socket
+import termcolor
 from seq import Seq
 
-
+seq_list = ["ACTGGGTACCATGACTAAGTCCAATGCATGCA", "ACGTGG", "AAGTGG", "AAATGG", "AAAAGG"]
+FILENAMES = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
 class Server:
     def __init__(self):
 
@@ -24,7 +26,6 @@ class Server:
                 # Read the message from the client, if any
                 msg = clientsocket.recv(2048).decode("utf-8")
                 response = self.calculate_response(str(msg))
-                print(f"Message from client: {msg}")
 
                 # Send the message
                 message = "Hello from the teacher's server\n"
@@ -42,7 +43,11 @@ class Server:
 
     def calculate_response(self, msg):
         if msg.startswith("PING"):
-            return "OK!"
+            termcolor.cprint("PING command!", "green")
+            return "OK!\n"
 
 
 
+
+
+c = Server()

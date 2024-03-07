@@ -1,7 +1,4 @@
 # Exercise 8
-from typing import List
-
-from P01.seq import Seq
 from seq import Seq
 
 PRACTICE = 1

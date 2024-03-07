@@ -16,15 +16,18 @@ ls.listen()
 
 print("The server is configured!")
 
+i = 1
 while True:
     (rs, address) = ls.accept()
-    print("Waiting for Clients to connect echo")
+    print("Waiting for Clients to connect")
     print(f"A client has connected to the server!")
-    print("Client IP,PORT: ", )
+    Msg = f"CONNECTION {i}. Client IP,PORT: {address}"
+    rs.send(Msg.encode())
     msg = rs.recv(2048).decode("utf-8")
     print("Message received: " + termcolor.colored(msg, "green"))
-    newMsg = "ECHO:  " + msg
+    newMsg = "\nECHO:  " + msg
     rs.send(newMsg.encode())
     rs.close()
+    i += 1
 # -- Close the socket
 ls.close()

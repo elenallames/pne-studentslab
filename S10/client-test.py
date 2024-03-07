@@ -1,8 +1,7 @@
 import socket
 import termcolor
 
-
-PORT = 8080
+PORT = 8081
 IP = "127.0.0.1"  # this IP address is local, so only requests from the same machine are possible
 
 # -- Step 1: create the socket
@@ -14,29 +13,26 @@ ls.bind((IP, PORT))
 # -- Step 3: Configure the socket for listening, server ready to listen different request
 ls.listen()
 
-print("The server is configured!")
-
 i = 0
-clients_list = []
+
 number_con = 0
+clients_list = []
 flag = True
 while flag:
     number_con += 1
     (rs, address) = ls.accept()
-    print("Waiting for Clients to connect")
-    print(f"A client has connected to the server!")
-    Msg = f"CONNECTION {number_con}. Client IP,PORT: {address}"
+    Msg = f"CONNECTION {i}. Client IP,PORT: {address}"
     rs.send(Msg.encode())
+    print("To server:" + termcolor.colored(f"Message{i}", "blue"))
     msg = rs.recv(2048).decode("utf-8")
-    print("Message received: " + termcolor.colored(msg, "green"))
-    newMsg = termcolor.colored(f"Message{i}", "green")
+    print("From server: " + termcolor.colored(msg, "green"))
+    newMsg = "\nECHO:  " + msg
     rs.send(newMsg.encode())
     rs.close()
-    i += 1
-    clients_list.append(address)
     if number_con == 5:
         flag = False
-
+    i += 1
+    clients_list.append(address)
 
 message = "The following clients has connected to server"
 rs.send(message.encode())

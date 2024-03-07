@@ -1,0 +1,2 @@
+Destination:            Name(if I know):             Times: #ping y la web
+8.8.8.8                 google.es                    time=8.277 ms, time=12.084 ms, time=13.877 ms

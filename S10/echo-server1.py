@@ -18,10 +18,10 @@ print("The server is configured!")
 
 while True:
     (rs, address) = ls.accept()
-    print("Waiting for Clients to connectecho")
+    print("Waiting for Clients to connect")
     print(f"A client has connected to the server!")
     msg = rs.recv(2048).decode("utf-8")
-    print("Message received: " + termcolor.colored(msg, "yellow"))
+    print("Message received: " + termcolor.colored(msg, "green"))
     newMsg = "ECHO:  " + msg
     rs.send(newMsg.encode())
     rs.close()

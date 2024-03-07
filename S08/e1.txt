@@ -1,0 +1,3 @@
+Machine:             Interface:          Date:            Place:            IP:
+Lab computer         Wire                28/02            Lab               212.128.255.17
+Laptop               Wi-Fi               28/02            Home              192.168.20.125

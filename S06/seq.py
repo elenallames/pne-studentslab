@@ -31,6 +31,7 @@ class Gene(Seq):
            All the objects of class Gene will inherit
            the methods from the Seq class
         """
+
     def __init__(self, strbases, name=""):
         super().__init__(strbases)
         self.name = name

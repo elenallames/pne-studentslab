@@ -4,6 +4,8 @@ from seq import Seq
 
 seq_list = ["ACTGGGTACCATGACTAAGTCCAATGCATGCA", "ACGTGG", "AAGTGG", "AAATGG", "AAAAGG"]
 FILENAMES = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
+
+
 class Server:
     def __init__(self):
 
@@ -45,9 +47,6 @@ class Server:
         if msg.startswith("PING"):
             termcolor.cprint("PING command!", "green")
             return "OK!\n"
-
-
-
 
 
 c = Server()

@@ -19,10 +19,11 @@ class Server:
             serversocket.bind((IP, PORT))
             # become a server socket
             serversocket.listen()
+            print("SEQ Server is configured!")
 
             while True:
                 # accept connections from outside
-                print(f"Waiting for clients {IP}, {PORT}")
+                print(f"Waiting for clients...")
                 (clientsocket, address) = serversocket.accept()
 
                 # Read the message from the client, if any

@@ -1,41 +1,49 @@
 # Exercise 6
 from Client0 import Client
 from seq import Seq
+import os
+
+
 PRACTICE = 2
 EXERCISE = 6
+GENE = "FRAT1"
+NUMBER_OF_FRAGMENTS = 10
+NUMBER_OF_BASES = 10
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
-IP = "212.128.255.64"
-PORT = 8081
+IP = "192.168.0.30"
+PORT1 = 8080
+PORT2 = 8081
 
-c1 = Client(IP, PORT)
+c1 = Client(IP, PORT1)
 print(c1)
-
-PORT = 8081
-IP = "172.17.0.1"
-
-c2 = Client(IP, PORT)
+c2 = Client(IP, PORT2)
 print(c2)
 
-s = Seq()
+filename = os.path.join("..", "sequences", GENE + ".txt")
+try:
+    s = Seq()
+    s.read_fasta(filename)
+    print(f"Gene {GENE}: {s}")
 
-s.read_fasta("FRAT1")
+    msg = f"Sending {GENE} Gene to the server, in fragments of {NUMBER_OF_BASES} bases..."
+    c1.talk(msg)
+    c2.talk(msg)
 
-msg = f"Sending FRAT1 Gene to the server, in fragments of 10 bases..."
-first_message_to_first_server = c1.talk(msg)
-first_message_to_second_server = c2.talk(msg)
+    start = 0
+    end = NUMBER_OF_BASES
+    for i in range(1, NUMBER_OF_FRAGMENTS + 1):
+        s_str = str(s)
+        fragment = s_str[start:end]
+        msg = f"Fragment {i}: {fragment}"
+        print(msg)
+        if i % 2 != 0:
+            c1.talk(msg)
+        else:
+            c2.talk(msg)
 
-msg2 = str(s)
-second_message_to_first_server = c1.talk(f"Gene FRAT1: {msg2}")
-second_message_to_second_server = c2.talk(f"Gene FRAT1: {msg2}")
-
-print(f"Gene FRAT1: {msg2}")
-for f in range(1, 11):
-    index = (f-1) * 10
-    fragment = msg2[index: index + 10]
-    print(f"Fragment {f}: {fragment}")
-    if f % 2 == 0:
-        message = c2.talk(f"Fragment {f}: {fragment}")
-    else:
-        message = c1.talk(f"Fragment {f}: {fragment}")
+        start += NUMBER_OF_BASES
+        end += NUMBER_OF_BASES
+except FileNotFoundError:
+    print(f"[ERROR]: file '{filename}' not found")

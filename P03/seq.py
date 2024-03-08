@@ -8,7 +8,7 @@ def are_bases_ok(strbases):
 
 
 class Seq:
-    """A class for representing sequences"""
+    """A class for representing  sequences"""
     BASES = ['A', 'T', 'C', 'G']
 
     def __init__(self, strbases=None):

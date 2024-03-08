@@ -1,7 +1,7 @@
 import socket
 import termcolor
 
-IP = "localhost"
+IP = "localhost"  # local's IP: 127.0.0.1
 PORT = 8080
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

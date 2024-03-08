@@ -1,47 +1,46 @@
 import socket
 import termcolor
 
-
+IP = "localhost"
 PORT = 8080
-IP = "127.0.0.1"  # this IP address is local, so only requests from the same machine are possible
+CONNECTIONS = 5
 
-# -- Step 1: create the socket
-ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+n = 0
+clients = []
 
-# -- Step 2: Bind the socket to server's IP and PORT
-ls.bind((IP, PORT))
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+try:
+    server_socket.bind((IP, PORT))
+    server_socket.listen()
 
-# -- Step 3: Configure the socket for listening, server ready to listen different request
-ls.listen()
+    while n != CONNECTIONS:
+        print(f"Waiting for connections at ({IP}:{PORT})...")
+        (client_socket, client_address) = server_socket.accept()
 
-print("The server is configured!")
+        n += 1
+        clients.append(client_address)
 
-i = 0
-clients_list = []
-number_con = 0
-flag = True
-while flag:
-    number_con += 1
-    (rs, address) = ls.accept()
-    print("Waiting for Clients to connect")
-    print(f"A client has connected to the server!")
-    Msg = f"CONNECTION {number_con}. Client IP,PORT: {address}"
-    rs.send(Msg.encode())
-    msg = rs.recv(2048).decode("utf-8")
-    print("Message received: " + termcolor.colored(msg, "green"))
-    newMsg = termcolor.colored(f"Message{i}", "green")
-    rs.send(newMsg.encode())
-    rs.close()
-    i += 1
-    clients_list.append(address)
-    if number_con == 5:
-        flag = False
+        print(f"Connection {n} from ({client_address})")
 
+        request_bytes = client_socket.recv(2048)
+        request = request_bytes.decode("utf-8")
+        print(f"Message from client: ", end="")
+        termcolor.cprint(request, 'green')
 
-message = "The following clients has connected to server"
-rs.send(message.encode())
-for i in range(len(clients_list)):
-    message = f"Client {i}: {clients_list[i]}"
-    rs.send(message.encode())
-# -- Close the socket
-ls.close()
+        response = f"ECHO: {request}\n"
+        response_bytes = str.encode(response)
+        client_socket.send(response_bytes)
+
+        client_socket.close()
+
+    server_socket.close()
+
+    print("The following clients has connected to the server:")
+    for index, client in enumerate(clients):
+        print(f"Client {index}: {client}")
+except socket.error:
+    print(f"Problems using port {PORT}. Do you have permission?")
+except KeyboardInterrupt:
+    print("Server stopped by the admin")
+    server_socket.close()

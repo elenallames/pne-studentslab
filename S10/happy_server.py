@@ -2,10 +2,13 @@ import socket
 
 # Configure the Server's IP and PORT
 PORT = 8081
-IP = '212.128.255.17'  # this IP address is local, so only requests from the same machine are possible
+IP = '127.0.0.1'  # this IP address is local, so only requests from the same machine are possible
 
 # -- Step 1: create the socket
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# -- Optional: This is for avoiding the problem of Port already in use
+ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 # -- Step 2: Bind the socket to server's IP and PORT
 ls.bind((IP, PORT))
@@ -13,19 +16,47 @@ ls.bind((IP, PORT))
 # -- Step 3: Configure the socket for listening
 ls.listen()
 
-(rs, address) = ls.accept()
 print("The server is configured!")
 
 while True:
-    (rs, address) = ls.accept()
+    # -- Waits for a client to connect
+    print("Waiting for Clients to connect")
 
-    print(f"Client{address}")
-    rs.close()
+    try:
+        (cs, client_ip_port) = ls.accept()
 
-    msg = rs.recv(2048).decode("utf-8")
+    # -- Server stopped manually
+    except KeyboardInterrupt:
+        print("Server stopped by the user")  # with control c
 
-    print("The client says...", msg)
-    newmsg = "I'm a happy server"
-    rs.send(newmsg.encode())
-# -- Close the socket
-ls.close()
+        # -- Close the listening socket
+        ls.close()
+
+        # -- Exit!
+        exit()  # to stop the program
+
+    # -- Execute this part if there are no errors
+    else:
+
+        print("A client has connected to the server!")
+
+        # -- Read the message from the client
+        # -- The received message is in raw bytes
+        msg_raw = cs.recv(2048)
+
+        # -- We decode it for converting it
+        # -- into a human-redeable string
+        msg = msg_raw.decode()
+
+        # -- Print the received message
+        print(f"Message received: {msg}")
+
+        # -- Send a response message to the client
+        response = "HELLO. I am the Happy Server :-)\n"
+
+        # -- The message has to be encoded into bytes
+        cs.send(response.encode())
+
+        # -- Close the data socket
+        cs.close()
+

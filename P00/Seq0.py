@@ -43,7 +43,7 @@ def seq_count(seq):
             d['G'] += 1
     print(f"Gene {seq}: {d}")
 
-def seq_reverse(seq: object, n: object) -> object:
+def seq_reverse(seq):
     gene = seq_read_fasta(seq)
     new_fragment = gene[:n]
     reverse_fragment = ""

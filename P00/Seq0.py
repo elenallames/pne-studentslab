@@ -44,6 +44,7 @@ def seq_count(seq):
     print(f"Gene {seq}: {d}")
 
 def seq_reverse(seq):
+    n = 20
     gene = seq_read_fasta(seq)
     new_fragment = gene[:n]
     reverse_fragment = ""

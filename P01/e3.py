@@ -1,6 +1,6 @@
 # Exercise 3
-
 from seq import Seq
+
 PRACTICE = 1
 EXCERCISE = 3
 

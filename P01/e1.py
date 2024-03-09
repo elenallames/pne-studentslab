@@ -1,5 +1,4 @@
 # Exercise 1
-
 from seq import Seq
 
 PRACTICE = 1

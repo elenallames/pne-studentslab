@@ -1,3 +1,4 @@
 # Exercise 6
 from Seq0 import *
-exercise6 = seq_reverse("U5", 20)
+n = 20
+exercise6 = seq_reverse("U5")

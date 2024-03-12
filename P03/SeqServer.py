@@ -1,5 +1,4 @@
 import socket
-import termcolor
 from seq import Seq
 import os
 

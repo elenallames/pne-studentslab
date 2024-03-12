@@ -93,6 +93,17 @@ class Seq:
 
         return most_frequent_base
 
+    def info(self):
+        s = f"Sequence: {self.strbases}\n"
+        s += f"Total length: {self.len()}\n"
+        for base, count in self.count().items():
+            if self.len() != 0:
+                percentage = (count * 100) / self.len()
+            else:
+                percentage = 0
+            s += f"{base}: {count} ({percentage:.1f} %)\n"
+        return s
+
 
 class Gene(Seq):
     """This class is derived from the Seq Class
@@ -108,3 +119,6 @@ class Gene(Seq):
     def __str__(self):
         """Print the Gene name along with the sequence"""
         return self.name + "-" + self.strbases
+
+    # def name_len(self):
+        # return self.name_len

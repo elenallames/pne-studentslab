@@ -5,7 +5,7 @@ import os
 
 IP = "127.0.0.1"
 PORT = 8080
-SEQUENCES = ["ADA", "FRAT1", "FXN", "RNU6_269P", "U5"]
+SEQUENCES = ["AAACCGTA", "GATA", "AACGT", "CCTGC", "ACGTACGT"]
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -21,17 +21,34 @@ try:
 
         request_bytes = client_socket.recv(2048)
         request = request_bytes.decode()
-
+        # request = request.strip()
         lines = request.splitlines()
-        slices = lines[0].split(' ')
+        slices = lines[0].split(' ')  # nos va devolver una lista con la position cero "info" y en la position uno la cadena de genes y la function strip quita los espacios en blanco que haya antes o despues del relleno
         print(f"Slices: {slices}")
-        command = slices[0]
+        command = slices[0]  # .lowercase/uppercase() (para ponerlo en mayusculas o minusculas)
         print(f"Command: {command}")
+
         if command == "PING":
             response = "OK!\n"
         elif command == "GET":
-            n = int(slices[1])
-            gene = SEQUENCES[n]
+            n = int(slices[1])  # en vez de poner un entero ponemos una string se termina aqui el codigo
+            bases = SEQUENCES[n]
+            s = Seq(bases)
+            response = str(s)
+        elif command == "INFO":
+            bases = slices[1]
+            s = Seq(bases)  # llamada al constructor
+            response = s.info()
+        elif command == "COMP":
+            bases = slices[1]
+            s = Seq(bases)
+            response = s.complement()
+        elif command == "REV":
+            bases = slices[1]
+            s = Seq(bases)
+            response = s.reverse()
+        elif command == "GENE":
+            gene = slices[1]
             s = Seq()
             filename = os.path.join("..", "sequences", gene + ".txt")
             s.read_fasta(filename)

@@ -1,0 +1,6 @@
+Try to connect from the Browser. What happens? Could you see the web page? (is the page green?)
+
+If you change the content of the page from html to plain, if you search for it in the browser, the body appears just
+as it was programmed, it doesn't get translated.
+With the html, the server translates the message so that you can see the page in green, and exactly how you were
+intended to see it in the first place.

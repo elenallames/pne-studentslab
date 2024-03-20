@@ -1,0 +1,6 @@
+When you connect from the browser without any change in the Content-Length you will see the Green server...
+but What happens when you modify the Content-Length?
+The page appears blank, the length given (%) is not enough to print any content.
+
+Test it with the curl command. Could you see the HTML message?
+No, you just see /HTTP and the version but not the message with it.

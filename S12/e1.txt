@@ -1,0 +1,27 @@
+1- Connected to the first URL: http://127.0.0.1:8080/hello
+
+Which is the request line?
+Request line: GET /hello HTTP/1.1
+
+Which is the resource that the client is asking for? (the path)
+The resource would be : hello , as the protocol is HTTP and the GET is the method, the 1.1 is the version
+
+
+2- Repeat the exercise for this URL: http://127.0.0.1:8080/file.html
+Which is the request line?
+Request line: GET /favicon.ico HTTP/1.1
+
+Which is the resource that the client is asking for? (the path)
+The resource would be : file.html, as the protocol is HTTP and the GET is the method, the 1.1 is the version
+
+
+3- Repeat the exercise for this URL: http://127.0.0.1:8080/hi/there?name=virus&type=corona
+Which is the request line?
+Request line: GET /hi/there?name=virus&type=corona HTTP/1.1
+
+Which is the resource that the client is asking for? (the path)
+The resource would be : hi/there?name=virus&type=corona, as the protocol is HTTP and the GET is the method, the 1.1 is the version
+
+
+4- What should be the URL that we have to write in the browser for accessing the /dna/u5 resource?
+GET /dna/u5 HTTP/1.1

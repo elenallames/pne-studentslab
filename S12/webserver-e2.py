@@ -35,7 +35,7 @@ def process_client(s):
     <!DOCTYPE html>
     <html lang="en" dir="ltr">
       <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8"> 
         <title>Green server</title>
       </head>
       <body style="background-color: lightgreen;">

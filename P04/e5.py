@@ -2,7 +2,6 @@ import socket
 import termcolor
 from pathlib import Path
 
-
 # -- Server network parameters
 IP = "127.0.0.1"
 PORT = 8080
@@ -24,9 +23,6 @@ def process_client(s):
     print("Request line: ", end="")
     termcolor.cprint(req_line, "green")
 
-    read_file = Path("index.html").read_text()
-
-
     # -- Generate the response message
     # It has the following lines
     # Status line
@@ -35,19 +31,19 @@ def process_client(s):
     # Body (content to send)
 
     # This new contents are written in HTML language
-    body = """
-    <!DOCTYPE html>
-    <html lang="en" dir="ltr">
-      <head>
-        <meta charset="utf-8">
-        <title>Green server</title>
-      </head>
-      <body style="background-color: lightgreen;">
-        <h1>GREEN SERVER</h1>
-        <p>I am the Green Server! :-)</p>
-      </body>
-    </html>
-    """
+    if "/info/C" in req_line:
+        body = Path("html/info/C.html").read_text()
+    elif "/info/A" in req_line:
+        body = Path("html/info/A.html").read_text()
+    elif "/info/G" in req_line:
+        body = Path("html/info/G.html").read_text()
+    elif "/info/T" in req_line:
+        body = Path("html/info/T.html").read_text()
+    elif "/info/error" in req_line:
+        body = Path("html/info/error.html").read_text()
+    else:
+        body = ""
+
     # -- Status line: We respond that everything is ok (200 code)
     status_line = "HTTP/1.1 200 OK\n"
 
@@ -76,7 +72,7 @@ ls.bind((IP, PORT))
 # -- Become a listening socket
 ls.listen()
 
-print("Green server configured!")
+print("server configured!")
 
 # --- MAIN LOOP
 while True:

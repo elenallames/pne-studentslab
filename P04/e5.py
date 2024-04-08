@@ -6,6 +6,11 @@ from pathlib import Path
 IP = "127.0.0.1"
 PORT = 8080
 
+def read_html_file(filename):
+    folder = "html/info/"
+    file_contents = Path(folder + filename).read_text()
+    return file_contents
+
 
 def process_client(s):
     # -- Receive the request message
@@ -31,20 +36,18 @@ def process_client(s):
     # Body (content to send)
 
     # This new contents are written in HTML language
-    if "/info/C" in req_line:
-        body = Path("html/info/C.html").read_text()
-    elif "/info/A" in req_line:
-        body = Path("html/info/A.html").read_text()
+    if "/info/A" in req_line:
+        body = read_html_file("A.html")
+    elif "/info/C" in req_line:
+        body = read_html_file("C.html")
     elif "/info/G" in req_line:
-        body = Path("html/info/G.html").read_text()
+        body = read_html_file("G.html")
     elif "/info/T" in req_line:
-        body = Path("html/info/T.html").read_text()
-    elif "/info/error" in req_line:
-        body = Path("html/info/error.html").read_text()
+        body = read_html_file("T.html")
     else:
-        body = ""
+        body = read_html_file("error.html")
 
-    # -- Status line: We respond that everything is ok (200 code)
+        # -- Status line: We respond that everything is ok (200 code)
     status_line = "HTTP/1.1 200 OK\n"
 
     # -- Add the Content-Type header
@@ -52,6 +55,7 @@ def process_client(s):
 
     # -- Add the Content-Length
     header += f"Content-Length: {len(body)}\n"
+
 
     # -- Build the message by joining together all the parts
     response_msg = status_line + header + "\n" + body
@@ -72,7 +76,7 @@ ls.bind((IP, PORT))
 # -- Become a listening socket
 ls.listen()
 
-print("server configured!")
+print("Server configured!")
 
 # --- MAIN LOOP
 while True:

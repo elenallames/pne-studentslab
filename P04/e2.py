@@ -6,6 +6,11 @@ from pathlib import Path
 IP = "127.0.0.1"
 PORT = 8080
 
+def read_html_file(filename):
+    folder = "html/info/"
+    file_contents = Path(folder + filename).read_text()
+    return file_contents
+
 
 def process_client(s):
     # -- Receive the request message
@@ -23,8 +28,6 @@ def process_client(s):
     print("Request line: ", end="")
     termcolor.cprint(req_line, "green")
 
-    read_file = Path("html/info/A.html").read_text()
-
     # -- Generate the response message
     # It has the following lines
     # Status line
@@ -34,9 +37,8 @@ def process_client(s):
 
     # This new contents are written in HTML language
     if "/info/A" in req_line:
-        body = read_file
-    else:
-        body = ""
+        body = read_html_file("A.html")
+
     # -- Status line: We respond that everything is ok (200 code)
     status_line = "HTTP/1.1 200 OK\n"
 
@@ -45,6 +47,7 @@ def process_client(s):
 
     # -- Add the Content-Length
     header += f"Content-Length: {len(body)}\n"
+
 
     # -- Build the message by joining together all the parts
     response_msg = status_line + header + "\n" + body
@@ -65,7 +68,7 @@ ls.bind((IP, PORT))
 # -- Become a listening socket
 ls.listen()
 
-print("server configured!")
+print("Server configured!")
 
 # --- MAIN LOOP
 while True:
@@ -82,4 +85,3 @@ while True:
         process_client(cs)
 
         # -- Close the socket
-        cs.close()

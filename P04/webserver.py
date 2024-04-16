@@ -1,100 +1,72 @@
 import socket
 import termcolor
 from pathlib import Path
+import os
 
-# -- Server network parameters
 IP = "127.0.0.1"
 PORT = 8080
 
-def read_html_file(filename):
-    folder = "html/info/"
-    file_contents = Path(folder + filename).read_text()
-    return file_contents
 
-
-def process_client(s):
-    # -- Receive the request message
-    req_raw = s.recv(2000)
-    req = req_raw.decode()
-
-    print("Message FROM CLIENT: ")
-
-    # -- Split the request messages into lines
-    lines = req.split('\n')
-
-    # -- The request line is the first
-    req_line = lines[0]
-
-    print("Request line: ", end="")
-    termcolor.cprint(req_line, "green")
-
-    # -- Generate the response message
-    # It has the following lines
-    # Status line
-    # header
-    # blank line
-    # Body (content to send)
-
-    # This new contents are written in HTML language
-
-    if "/info/A" in req_line:
-        body = read_html_file("A.html")
-    elif "/info/C" in req_line:
-        body = read_html_file("C.html")
-    elif "/info/G" in req_line:
-        body = read_html_file("G.html")
-    elif "/info/T" in req_line:
-        body = read_html_file("T.html")
-    elif "" in req_line:
-        body = read_html_file("index.html")
-    else:
-        body = read_html_file("error.html")
-
-
-        # -- Status line: We respond that everything is ok (200 code)
-    status_line = "HTTP/1.1 200 OK\n"
-
-    # -- Add the Content-Type header
-    header = "Content-Type: text/html\n"
-
-    # -- Add the Content-Length
-    header += f"Content-Length: {len(body)}\n"
-
-
-    # -- Build the message by joining together all the parts
-    response_msg = status_line + header + "\n" + body
-    cs.send(response_msg.encode())
-
-
-# -------------- MAIN PROGRAM
-# ------ Configure the server
-# -- Listening socket
-ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# -- Optional: This is for avoiding the problem of Port already in use
-ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
-# -- Setup up the socket's IP and PORT
-ls.bind((IP, PORT))
-
-# -- Become a listening socket
-ls.listen()
-
-print("Server configured!")
-
-# --- MAIN LOOP
-while True:
-    print("Waiting for clients....")
+def process_client(client_socket):
     try:
-        (cs, client_ip_port) = ls.accept()
-    except KeyboardInterrupt:
-        print("Server stopped!")
-        ls.close()
-        exit()
-    else:
+        request_bytes = client_socket.recv(2048)
+        request = request_bytes.decode()
+        lines = request.splitlines()
+        request_line = lines[0]
+        print("Request line: ", end="")
+        termcolor.cprint(request_line, 'green')
+        slices = request_line.split(' ')
+        method = slices[0]
+        resource = slices[1]
+        version = slices[2]
 
-        # Service the client
-        process_client(cs)
+        if resource == "/":
+            file_name = os.path.join("html", "index.html")
+            body = Path(file_name).read_text()
+            status_line = "HTTP/1.1 200 OK\n"
+        elif resource == "/info/A":
+            file_name = os.path.join("html", "A.html")
+            body = Path(file_name).read_text()
+            status_line = "HTTP/1.1 200 OK\n"
+        elif resource == "/info/C":
+            file_name = os.path.join("html", "C.html")
+            body = Path(file_name).read_text()
+            status_line = "HTTP/1.1 200 OK\n"
+        elif resource == "/info/G":
+            file_name = os.path.join("html", "G.html")
+            body = Path(file_name).read_text()
+            status_line = "HTTP/1.1 200 OK\n"
+        elif resource == "/info/T":
+            file_name = os.path.join("html", "T.html")
+            body = Path(file_name).read_text()
+            status_line = "HTTP/1.1 200 OK\n"
+        else:
+            file_name = os.path.join("html", "error.html")
+            body = Path(file_name).read_text()
+            status_line = "HTTP/1.1 404 Not_found\n"
+        header = "Content-Type: text/html\n"
+        header += f"Content-Length: {len(body)}\n"
+        response = f"{status_line}{header}\n{body}"
+        response_bytes = response.encode()
+        client_socket.send(response_bytes)
+    except IndexError:
+        pass
 
-        # -- Close the socket
-        cs.close()
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+server_socket.bind((IP, PORT))
+server_socket.listen()
+
+print("DNA Bases Server configured!")
+
+try:
+    while True:
+        print("Waiting for clients...")
+
+        (client_socket, client_address) = server_socket.accept()
+        process_client(client_socket)
+        client_socket.close()
+except KeyboardInterrupt:
+    print("Server Stopped!")
+    server_socket.close()

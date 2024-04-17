@@ -31,29 +31,9 @@ class MyHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         if path == "/":
             contents = Path(f"{HTML_FOLDER}/form-e1.html").read_text()
             self.send_response(200)
-        elif path == "/echo":
-            try:
-                msg_param = arguments['msg'][0]  # "Julio"
-                print(msg_param)
-                contents = read_html_file("result-echo-server-e1.html").render(context={"todisplay": msg_param})
-
-                # contents = f"""
-                #     <!DOCTYPE html>
-                #     <html lang="en">
-                #         <head>
-                #             <meta charset="utf-8">
-                #             <title>Result</title>
-                #         </head>
-                #         <body>
-                #             <h1>Received message:</h1>
-                #             <p>{msg_param}</p>
-                #             <a href="/">Main page</a>
-                #         </body>
-                #     </html>"""
-                self.send_response(200)
-            except (KeyError, IndexError):
-                contents = Path(f"{HTML_FOLDER}/error.html").read_text()
-                self.send_response(404)
+        elif path.startswith("/ping"):
+            contents = Path(f"{HTML_FOLDER}/form-e1.html").read_text()
+            self.send_response(200)
         else:
             contents = Path(f"{HTML_FOLDER}/error.html").read_text()
             self.send_response(404)
@@ -74,3 +54,4 @@ with socketserver.TCPServer(("", PORT), MyHTTPRequestHandler) as httpd:
         print()
         print("Stopped by the user")
         httpd.server_close()
+

@@ -4,7 +4,7 @@ import termcolor
 from pathlib import Path
 
 # Define the Server's port
-PORT = 8080
+PORT = 8081
 
 
 # -- This is for preventing the error: "Port already in use"

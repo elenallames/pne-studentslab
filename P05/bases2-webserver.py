@@ -14,6 +14,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         termcolor.cprint(self.requestline, 'green')
 
         resource = self.path
+        # resource_to_file = {
+        #   "/": "index.html",
+        #   "/index.html": "index.html",
+        # "/info/A.html": os.path.join("info","A.html")
+        # "/info/C.html": os.path.join("info", "C.html")
+        # "/info/G.html": os.path.join("info","G.html")
+        # "/info/T.html": os.path.join("info","T.html")
+        # }
+
+        # file_name = resource_to_file.get(resource, self.path[1:])
+        # file_path = os.path.join("info", "T.html")
+        # we eliminate from the first if to the last else
+
         if resource == "/" or resource == "/index.html":
             file_name = os.path.join("html", "index.html")
             body = Path(file_name).read_text()
@@ -35,21 +48,26 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             body = Path(file_name).read_text()
             self.send_response(200)
         else:
+            resource = self.path[1:]
+        try:
+            file_name = os.path.join("html", resource)  # file_path
+            body = Path(file_name).read_text()
+            self.send_response(200)
+        except FileNotFoundError:
             file_name = os.path.join("html", "error.html")
             body = Path(file_name).read_text()
             self.send_response(404)
-
-        contents_bytes = body.encode()
+        body_bytes = body.encode()
         self.send_header('Content-Type', 'text/html')
-        self.send_header('Content-Length', str(len(contents_bytes)))
+        self.send_header('Content-Length', str(len(body_bytes)))
         self.end_headers()
 
-        self.wfile.write(contents_bytes)
+        self.wfile.write(body_bytes)
 
         return
 
 
-with socketserver.TCPServer(("", PORT), TestHandler) as httpd:
+with socketserver.TCPServer(("", PORT), TestHandler) as httpd:  # crear un objeto de la clase tcp
     print("Serving at PORT...", PORT)
 
     try:

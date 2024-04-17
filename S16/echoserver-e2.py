@@ -12,7 +12,7 @@ def read_html_file(filename):
     return contents
 
 
-PORT = 8080
+PORT = 8081
 HTML_FOLDER = "html"
 
 socketserver.TCPServer.allow_reuse_address = True
@@ -81,3 +81,4 @@ with socketserver.TCPServer(("", PORT), MyHTTPRequestHandler) as httpd:
         print()
         print("Stopped by the user")
         httpd.server_close()
+

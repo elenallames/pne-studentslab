@@ -7,7 +7,7 @@ def are_bases_ok(strbases):
     return ok
 
 class Seq:
-    """A class for representing sequences"""
+    """A class for representing genes"""
     BASES = ['A', 'T', 'C', 'G']
 
     def __init__(self, strbases=None):
@@ -91,6 +91,10 @@ class Seq:
         # the maximum is determined based on the values in the dictionary, but the key is the one returned
 
         return most_frequent_base
+
+    def info(self):
+        pass
+
 
 class Gene(Seq):
     """This class is derived from the Seq Class

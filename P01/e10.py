@@ -9,7 +9,7 @@ print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
 genes = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
 
 for g in genes:
-    filename = os.path.join("..", "sequences", g + ".txt")
+    filename = os.path.join("..", "genes", g + ".txt")
     try:
         s = Seq()
         s.read_fasta(filename)

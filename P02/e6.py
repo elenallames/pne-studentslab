@@ -21,7 +21,7 @@ print(c1)
 c2 = Client(IP, PORT2)
 print(c2)
 
-filename = os.path.join("..", "sequences", GENE + ".txt")
+filename = os.path.join("..", "genes", GENE + ".txt")
 try:
     s = Seq()
     s.read_fasta(filename)

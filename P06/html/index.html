@@ -2,19 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>INDEX</title>
+    <title>Seq2 server - Index</title>
   </head>
   <body>
   <h1>SEQ2 Server</h1>
   <p>Access to the server</p>
   <hr>
   <p>Is the server alive?</p>
-    <form action="ping" method="get">
+    <form action="/ping" method="get">
       <input type="submit" value="PING">
     </form>
   <hr>
   <p>Get a Sequence. Select a sequence number</p>
-  <form action="get" method="get">
+  <form action="/get" method="get">
     <input type="submit" value="GET">
       <select name="s">
         <option value="0">0</option>
@@ -26,7 +26,7 @@
     </form>
   <hr>
   <p>Get a Gene. Select the name</p>
-  <form action="gene" method="get">
+  <form action="/gene" method="get">
     <input type="submit" value="GENE">
       <select name="g">
         <option value="U5">U5</option>
@@ -37,8 +37,9 @@
       </select>
     </form>
   <hr>
-  <form action="operation" method="get">
-  Write a Sequence <input type = "text" name = "operation">
+  <form action="/operation" method="get">
+  Write a Sequence
+    <input type = "text" name = "bases">
     <p></p>
   Select operation:
       <input type="radio" name="op" value="Info" checked> Info
@@ -47,6 +48,7 @@
     <p></p>
   Perform operation:
   <input type="submit" value = "OPERATE!">
+    <hr>
   </form>
   </body>
 </html>

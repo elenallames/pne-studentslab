@@ -49,7 +49,7 @@ try:
         elif command == "GENE":
             gene = slices[1]
             s = Seq()
-            filename = os.path.join("..", "sequences", gene + ".txt")
+            filename = os.path.join("..", "genes", gene + ".txt")
             s.read_fasta(filename)
             response = str(s)
 

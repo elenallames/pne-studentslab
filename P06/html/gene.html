@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Seq2 server - Gene</title>
-</head>
-<body>
-  <h1>Gene name: {{context.gene_name}}</h1>
-<textarea rows="50" cols="50">{{context.sequence}}</textarea><br>
-<a href="/">Main page</a>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Seq2 Server - Gene</title>
+    </head>
+    <body>
+        <h2>Gene name: {{context.gene_name}}</h2>
+        <textarea rows="50" cols="50">{{context.sequence}}</textarea><br>
+        <!-- textarea: text field having several rows and columns, you can even scroll through it since there are many str-->
+        <!-- the value of rows and columns is just for what is shown by default but nothing is deleted, you just scroll through the rest-->
+        <a href="/">Main page</a>
+    </body>
 </html>

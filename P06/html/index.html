@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Seq2 server - Index</title>
-  </head>
-  <body>
-  <h1>SEQ2 Server</h1>
-  <p>Access to the server</p>
-  <hr>
-  <p>Is the server alive?</p>
-    <form action="/ping" method="get">
-      <input type="submit" value="PING">
-    </form>
-  <hr>
-  <p>Get a Sequence. Select a sequence number</p>
-  <form action="/get" method="get">
-    <input type="submit" value="GET">
-      <select name="s">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-    </form>
-  <hr>
-  <p>Get a Gene. Select the name</p>
-  <form action="/gene" method="get">
-    <input type="submit" value="GENE">
-      <select name="g">
-        <option value="U5">U5</option>
-        <option value="ADA">ADA</option>
-        <option value="FRAT1">FRAT1</option>
-        <option value="RNU6_269P">RNU6_269P</option>
-        <option value="FXN">FXN</option>
-      </select>
-    </form>
-  <hr>
-  <form action="/operation" method="get">
-  Write a Sequence
-    <input type = "text" name = "bases">
-    <p></p>
-  Select operation:
-      <input type="radio" name="op" value="Info" checked> Info
-      <input type="radio" name="op" value="Comp"> Comp
-      <input type="radio" name="op" value="Rev"> Rev
-    <p></p>
-  Perform operation:
-  <input type="submit" value = "OPERATE!">
-    <hr>
-  </form>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Seq2 Server</title>
+    </head>
+    <body>
+        <h1>Seq2 Server</h1>
+        <p>Access to the server</p>
+        <hr>  <!--THE DIVIDING BLACK LINES-->
+        <form action="/ping" method="get">  <!-- get is predefined, so you don't need to put "method="get""-->
+         Is the server alive? <input type="submit" value="PING">
+        </form>
+        <hr>
+
+        <form action="/get" method="get">  <!-- these two get have nothing alike-->
+             Get a sequence. Select a sequence number:
+            <select name="sequence_number">
+                {% for n in range(0, context.n_sequences) %}  <!-- for loop, from 0 to the total seq(key) from dict context -->
+                    <option value={{n}}>{{n}}</option>  <!--the first {{n}} is the value and the other is what will be shown to the user-->
+                {% endfor %}
+            </select>  <!-- remember select is a special input-->
+            <input type="submit" value="GET">
+        </form>
+        <hr>
+
+        <form action="/gene" method="get">
+             Get a sequence. Select a sequence number:
+            <select name="gene_name">  <!-- remember name is the key and the values would be the different genes-->
+                {% for g in context.genes %} <!--will iterate through the elements of the list GENES -->
+                    <option value={{g}}>{{g}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="GENE">
+        </form>
+        <hr>
+
+        <form action="/operation" method="get">
+            Write a sequence:
+            <input type="text" name="bases">
+            <br>
+            Select an operation:  <!-- remember all inputs need to have the same name to be linked-->
+            <input type="radio" name="op" value="info" checked> Info
+            <input type="radio" name="op" value="comp"> Comp
+            <input type="radio" name="op" value="rev"> Rev
+            <br>
+            Perform operation:
+            <input type="submit" value="OPERATE!">
+        </form>
+    </body>
 </html>

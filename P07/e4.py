@@ -2,7 +2,6 @@ import http.client
 import json
 from http import HTTPStatus
 from seq import Seq
-import termcolor
 
 GENES = {
     "FRAT1": "ENSG00000165879",

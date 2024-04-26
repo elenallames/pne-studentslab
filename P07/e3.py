@@ -1,45 +1,44 @@
 import http.client
 import json
-from http import HTTPStatus
+import termcolor
 
-GENES = {
-    "FRAT1": "ENSG00000165879",
-    "ADA": "ENSG00000196839",
-    "FXN": "ENSG00000165060",
-    "RNU6_269P": "ENSG00000212379",
-    "MIR633": "ENSG00000207552",
-    "TTTY4C": "ENSG00000228296",
-    "RBMY2YP": "ENSG00000227633",
-    "FGFR3": "ENSG00000068078",
-    "KDR": "ENSG00000128052",
-    "ANK2": "ENSG00000145362"
-}
-
-GENE = "MIR633"
 SERVER = 'rest.ensembl.org'
-RESOURCE = f'/sequence/id/{GENES[GENE]}'
+ENDPOINT = '/sequence/id/ENSG00000207552'
 PARAMS = '?content-type=application/json'
-URL = RESOURCE + PARAMS
+URL = SERVER + ENDPOINT + PARAMS
 
 print()
-print(f"SERVER: {SERVER}")
-print(f"URL: {URL}")
+print(f"Server: {SERVER}")
+print(f"URL : {URL}")
 
+#Connect with the server
 conn = http.client.HTTPConnection(SERVER)
 
+
 try:
-    conn.request("GET", URL)
+    conn.request("GET", ENDPOINT + PARAMS)
 except ConnectionRefusedError:
     print("ERROR! Cannot connect to the Server")
     exit()
 
-response = conn.getresponse()
-print(f"Response received!: {response.status} {response.reason}\n")
-if response.status == HTTPStatus.OK:
-    data_str = response.read().decode()
-    data = json.loads(data_str)
-    print(data)
-    print(f"Gene: {GENE}")
-    print(f"Description: {data['desc']}")
-    print(f"Bases: {data['seq']}")
+# -- Read the response message from the server
+r1 = conn.getresponse()
 
+# -- Print the status line
+print(f"Response received!: {r1.status} {r1.reason}\n")
+
+# -- Read the response's body
+data1 = r1.read().decode("utf-8")
+
+gene = json.loads(data1)
+
+print()
+termcolor.cprint("Gene: ", 'green', end="")
+print("MIR633")
+
+termcolor.cprint("Description: ", 'green', end="")
+print(gene['desc'])
+
+
+termcolor.cprint("Bases: ", 'green', end="")
+print(gene['seq'])

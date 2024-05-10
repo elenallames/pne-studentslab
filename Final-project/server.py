@@ -9,7 +9,7 @@ import os
 import json
 
 
-PORT = 8080
+PORT = 8081
 HTML_FOLDER = "html"  # optional, since we could have the html files in the same directory as the server
 ENSEMBL_SERVER = "rest.ensembl.org"  # the IP of the server
 RESOURCE_TO_ENSEMBL_REQUEST = {

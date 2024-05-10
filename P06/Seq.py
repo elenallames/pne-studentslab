@@ -6,7 +6,7 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 import jinja2
 import os
-from Seq import Seq
+from seq import Seq
 
 
 PORT = 8080

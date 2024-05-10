@@ -7,7 +7,7 @@ from urllib.parse import urlparse, parse_qs
 import jinja2
 import os
 import json
-from Seq import Seq
+from seq import
 
 
 PORT = 8080

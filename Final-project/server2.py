@@ -1,16 +1,14 @@
 import http.server
-from http import HTTPStatus
+import json
+import os
 import socketserver
-import termcolor
+from http import HTTPStatus
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 import jinja2
-import os
-import json
-from seq import
+import termcolor
 
-
-PORT = 8080
+PORT = 8081
 HTML_FOLDER = "html"  # optional, since we could have the html files in the same directory as the server
 ENSEMBL_SERVER = "rest.ensembl.org"  # the IP of the server
 RESOURCE_TO_ENSEMBL_REQUEST = {

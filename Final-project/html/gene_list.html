@@ -5,9 +5,9 @@
         <title>Gene List</title>
     </head>
     <body style="background-color: lavender">
-        <h1> Genes located in chromosome <i>{{context.chromo_number}}</i> from <i>{{context.start}}</i> to <i>{{context.end}}</i></h1>
+        <h1> Genes located in chromosome <i>{{context.chromo}}</i> from <i>{{context.start}}</i> to <i>{{context.end}}</i></h1>
         <ul>
-            {% for gene in context.genes %}
+            {% for gene in context.names %}
             <li>{{gene}}</li>
             {% endfor %}
         </ul><br>

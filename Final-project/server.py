@@ -174,7 +174,7 @@ def get_id(gene):
     error, data = server_request(EMSEMBL_SERVER, url)
     gene_id = None
     if not error:
-        gene_id = data['data'][0]['id'] 
+        gene_id = data['data'][0]['id']
     return gene_id
 
 
@@ -204,7 +204,7 @@ def geneSeq(parameters):
                     contents = json.dumps(context)
                 else:
                     content_type = "text/html"
-                    contents = read_html_template("gene_seq.html").render(context=context)
+                    contents = read_html_template("human_gene.html").render(context=context)
                 code = HTTPStatus.OK
     except Exception as e:
         print(f"Error: {e}")
@@ -281,7 +281,7 @@ def geneCalc(parameters):
                     contents = json.dumps(context)
                 else:
                     content_type = "text/html"
-                    contents = read_html_template("gene_calc.html").render(context=context)
+                    contents = read_html_template("gene_calculations.html").render(context=context)
                 code = HTTPStatus.OK
     except Exception as e:
         print(f"Error: {e}")

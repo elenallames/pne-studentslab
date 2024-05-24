@@ -4,7 +4,7 @@ def seq_ping():
     print("OK")
 
 def seq_read_fasta(filename):
-    folder = "../genes/"
+    folder = "../sequences/"
     filename = filename + ".txt"
     file_contents = Path(folder + filename).read_text()
     header = file_contents.find("\n")

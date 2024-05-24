@@ -16,7 +16,7 @@ c = Client(IP, PORT)
 print(c)
 
 for gene in GENES:
-    filename = os.path.join("..", "genes", gene + ".txt")
+    filename = os.path.join("..", "sequences", gene + ".txt")
     try:
         s = Seq()  # s.__str__()
         s.read_fasta(filename)

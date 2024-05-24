@@ -17,7 +17,7 @@ PORT = 8081
 c = Client(IP, PORT)
 print(c)
 
-filename = os.path.join("..", "genes", GENE + ".txt")
+filename = os.path.join("..", "sequences", GENE + ".txt")
 try:
     s = Seq()
     s.read_fasta(filename)

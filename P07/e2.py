@@ -20,4 +20,4 @@ print()
 
 for gene, id in GENES.items():
     termcolor.cprint(gene, 'green', end='')
-    print(": --> {id}")
+    print(f": --> {id}")

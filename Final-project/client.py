@@ -48,7 +48,3 @@ print(f"Response received!: {response.status} {response.reason}\n")
 if response.status != HTTPStatus.OK:
     data_str = response.read().decode()
     print(data_str)
-
-
-
-

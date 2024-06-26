@@ -6,9 +6,9 @@ EXCERCISE = 2
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
 
-seq_list = [Seq(), Seq("TATAC")]
-for i, s in enumerate(seq_list):
-    print(f"Sequence {i + 1}: {s}")
+sequence_list = [Seq(), Seq("TATAC")]
+for i, sequence in enumerate(sequence_list):
+    print(f"Sequence {i + 1}: {sequence}")
 
 
 

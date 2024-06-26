@@ -5,7 +5,7 @@ PRACTICE = 1
 EXCERCISE = 1
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
-s = Seq("ACTGA")
-print(f"Sequence 1: (Length: {s.len()}) {s}")
+sequence = Seq("ACTGA")
+print(f"Sequence 1: (Length: {sequence.len()}) {sequence}")
 
 

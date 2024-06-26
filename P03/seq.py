@@ -1,14 +1,8 @@
 def are_bases_ok(strbases):
-    ok = True
-    for c in strbases:
-        if c not in Seq.BASES:
-            ok = False
-            break
-    return ok
-
+    return all(c in Seq.BASES for c in strbases)
 
 class Seq:
-    """A class for representing  genes"""
+    """A class for representing genes"""
     BASES = ['A', 'T', 'C', 'G']
 
     def __init__(self, strbases=None):
@@ -26,90 +20,47 @@ class Seq:
         return self.strbases
 
     def len(self):
-        if self.strbases == "NULL" or self.strbases == "ERROR":
-            return 0
-        return len(self.strbases)
+        return len(self.strbases) if self.strbases not in {"NULL", "ERROR"} else 0
 
     def count_base(self, base):
-        if self.strbases == "NULL" or self.strbases == "ERROR":
-            return 0
-        return self.strbases.count(base)
+        return self.strbases.count(base) if self.strbases not in {"NULL", "ERROR"} else 0
 
     def count(self):
-        bases_appearances = {}
-        for base in Seq.BASES:
-            bases_appearances[base] = self.count_base(base)
-        return bases_appearances
+        return {base: self.count_base(base) for base in Seq.BASES}
 
     def reverse(self):
-        if self.strbases == "NULL" or self.strbases == "ERROR":
-            return "ERROR"
-        else:
-            reverse = ''
-            seq = self.strbases
-            index = len(seq) - 1
-            while index >= 0:
-                reverse += seq[index]
-                index -= 1
-            return reverse
+        return self.strbases[::-1] if self.strbases not in {"NULL", "ERROR"} else "ERROR"
 
     def complement(self):
-        complement = ""
-        if self.strbases is None:
-            return "NULL"
-        else:
-            for base in self.strbases:
-                if base == "A":
-                    complement += "T"
-                elif base == "G":
-                    complement += "C"
-                elif base == "C":
-                    complement += "G"
-                elif base == "T":
-                    complement += "A"
-                else:
-                    return "ERROR"
-        return complement
+        if self.strbases in {"NULL", "ERROR"}:
+            return "ERROR"
+        complement_map = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+        return ''.join(complement_map.get(base, "ERROR") for base in self.strbases)
 
     def read_fasta(self, filename):
         from pathlib import Path
 
         file_content = Path(filename).read_text()
         lines = file_content.splitlines()
-        body = lines[1:]
-
-        dna_sequence = ""
-        for line in body:
-            dna_sequence += line  # dna_sequence = dna_sequence + line
-        self.strbases = dna_sequence
+        self.strbases = ''.join(lines[1:])
 
     def max_base(self):
-        bases_dict = {}
-        for b in Seq.BASES:
-            bases_dict[b] = self.count_base(b)
-
-        most_frequent_base = max(bases_dict, key=bases_dict.get)
-        # the maximum is determined based on the values in the dictionary, but the key is the one returned
-
-        return most_frequent_base
+        counts = self.count()
+        return max(counts, key=counts.get)
 
     def info(self):
-        s = f"Sequence: {self.strbases}\n"
-        s += f"Total length: {self.len()}\n"
-        for base, count in self.count().items():
-            if self.len() != 0:
-                percentage = (count * 100) / self.len()
-            else:
-                percentage = 0
-            s += f"{base}: {count} ({percentage:.1f} %)\n"
-        return s
-
+        print(f"Sequence: {self.strbases}")
+        print(f"Length: {self.len()}")
+        print(f"Base counts: {self.count()}")
+        print(f"Reverse: {self.reverse()}")
+        print(f"Complement: {self.complement()}")
+        print(f"Most frequent base: {self.max_base()}")
 
 class Gene(Seq):
     """This class is derived from the Seq Class
-           All the objects of class Gene will inherit
-           the methods from the Seq class
-        """
+       All the objects of class Gene will inherit
+       the methods from the Seq class
+    """
 
     def __init__(self, strbases, name=""):
         super().__init__(strbases)
@@ -118,7 +69,4 @@ class Gene(Seq):
 
     def __str__(self):
         """Print the Gene name along with the sequence"""
-        return self.name + "-" + self.strbases
-
-    # def name_len(self):
-        # return self.name_len
+        return f"{self.name}-{self.strbases}"

@@ -11,9 +11,8 @@ print()
 print(f"Server: {SERVER}")
 print(f"URL : {URL}")
 
-#Connect with the server
+# Connect with the server
 conn = http.client.HTTPConnection(SERVER)
-
 
 try:
     conn.request("GET", ENDPOINT + PARAMS)
@@ -38,7 +37,6 @@ print("MIR633")
 
 termcolor.cprint("Description: ", 'green', end="")
 print(gene['desc'])
-
 
 termcolor.cprint("Bases: ", 'green', end="")
 print(gene['seq'])

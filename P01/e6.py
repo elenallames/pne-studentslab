@@ -5,7 +5,7 @@ PRACTICE = 1
 EXCERCISE = 6
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
-seq_list = [Seq(), Seq("ACTGA"), Seq("Invalid sequence")]
-for i, s in enumerate(seq_list):
-    print(f"Sequence {i + 1}: (Length: {s.len()}) {s}")
-    print(f"\tBases: {s.count()}")
+sequence_list = [Seq(), Seq("ACTGA"), Seq("Invalid sequence")]
+for i, sequence in enumerate(sequence_list):
+    print(f"Sequence {i + 1}: (Length: {sequence.len()}) {sequence}")
+    print(f"\tBases: {sequence.count()}")

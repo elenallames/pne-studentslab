@@ -6,61 +6,75 @@ IP = "127.0.0.1"
 PORT = 8080
 SEQUENCES = ["AAACCGTA", "GATA", "AACGT", "CCTGC", "ACGTACGT"]
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-try:
-    server_socket.bind((IP, PORT))
-    server_socket.listen()
 
-    print("SEQ Server configured!")
-
-    while True:
-        print(f"Waiting for connections at ({IP}:{PORT})...")
-        (client_socket, client_address) = server_socket.accept()
-
+def handle_client(client_socket):
+    try:
         request_bytes = client_socket.recv(2048)
         request = request_bytes.decode()
-        # request = request.strip()
         lines = request.splitlines()
-        slices = lines[0].split(' ')  # nos va devolver una lista con la position cero "info" y en la position uno la cadena de genes y la function strip quita los espacios en blanco que haya antes o despues del relleno
+        slices = lines[0].split(' ')
+        command = slices[0].upper()
+
         print(f"Slices: {slices}")
-        command = slices[0]  # .lowercase/uppercase() (para ponerlo en mayusculas o minusculas)
         print(f"Command: {command}")
 
         if command == "PING":
             response = "OK!\n"
         elif command == "GET":
-            n = int(slices[1])  # en vez de poner un entero ponemos una string se termina aqui el codigo
+            n = int(slices[1])
             bases = SEQUENCES[n]
             s = Seq(bases)
-            response = str(s)
+            response = str(s) + "\n"
         elif command == "INFO":
             bases = slices[1]
-            s = Seq(bases)  # llamada al constructor
-            response = s.info()
+            s = Seq(bases)
+            response = s.info() + "\n"
         elif command == "COMP":
             bases = slices[1]
             s = Seq(bases)
-            response = s.complement()
+            response = s.complement() + "\n"
         elif command == "REV":
             bases = slices[1]
             s = Seq(bases)
-            response = s.reverse()
+            response = s.reverse() + "\n"
         elif command == "GENE":
             gene = slices[1]
             s = Seq()
-            filename = os.path.join("..", "sequences", gene + ".txt")
+            filename = os.path.join("..", "sequences", f"{gene}.txt")
             s.read_fasta(filename)
-            response = str(s)
+            response = str(s) + "\n"
+        else:
+            response = "ERROR: Unknown command\n"
 
         print(response)
-        response_bytes = response.encode()
-        client_socket.send(response_bytes)
-
+        client_socket.sendall(response.encode())
+    except Exception as e:
+        print(f"Error handling client request: {e}")
+        client_socket.sendall(b"ERROR: An error occurred\n")
+    finally:
         client_socket.close()
-except socket.error:
-    print(f"Problems using port {PORT}. Do you have permission?")
-except KeyboardInterrupt:
-    print("Server stopped by the admin")
-    server_socket.close()
 
+
+def start_server():
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    try:
+        server_socket.bind((IP, PORT))
+        server_socket.listen()
+        print("SEQ Server configured!")
+
+        while True:
+            print(f"Waiting for connections at ({IP}:{PORT})...")
+            client_socket, client_address = server_socket.accept()
+            print(f"Connection from {client_address}")
+            handle_client(client_socket)
+    except socket.error as e:
+        print(f"Socket error: {e}")
+    except KeyboardInterrupt:
+        print("Server stopped by the admin")
+    finally:
+        server_socket.close()
+
+
+if __name__ == "__main__":
+    start_server()

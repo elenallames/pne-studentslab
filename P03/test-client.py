@@ -3,46 +3,59 @@ from client import Client
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 8080
 PRACTICE = 3
-EXCERCISE = 7
+EXERCISE = 7
 N = 5
 BASES = "ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCA"
 GENES = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
 
-print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
 
-c = Client(SERVER_IP, SERVER_PORT)
-print(c)
+def main():
+    print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
-print("* Testing PING...")
-response = c.talk("PING")
-print(response)
+    # Initialize the client
+    client = Client(SERVER_IP, SERVER_PORT)
+    print(client)
 
-print("* Testing GET...")
-for n in range(N):
-    response = c.talk(f"GET {n}")
-    print(f"GET {n}: {response}")
-
-print()
-
-print("* Testing INFO...")
-response = c.talk(f"INFO {BASES}")
-print(response)
-
-print("* Testing COMP...")
-print(f"COMP {BASES}")
-response = c.talk(f"COMP {BASES}")
-print(response)
-
-print("* Testing REV...")
-print(f"REV {BASES}")
-response = c.talk(f"REV {BASES}")
-print(response)
-
-print()
-
-print("* Testing GENE...")
-for gene in GENES:
-    print(f"GENE {gene}")
-    response = c.talk(f"GENE {gene}")
+    # Test PING command
+    print("* Testing PING...")
+    response = client.talk("PING")
     print(response)
+
+    # Test GET command for a range of indices
+    print("* Testing GET...")
+    for n in range(N):
+        response = client.talk(f"GET {n}")
+        print(f"GET {n}: {response}")
+
     print()
+
+    # Test INFO command with the provided BASES sequence
+    print("* Testing INFO...")
+    response = client.talk(f"INFO {BASES}")
+    print(response)
+
+    # Test COMP command with the provided BASES sequence
+    print("* Testing COMP...")
+    print(f"COMP {BASES}")
+    response = client.talk(f"COMP {BASES}")
+    print(response)
+
+    # Test REV command with the provided BASES sequence
+    print("* Testing REV...")
+    print(f"REV {BASES}")
+    response = client.talk(f"REV {BASES}")
+    print(response)
+
+    print()
+
+    # Test GENE command with each gene in the GENES list
+    print("* Testing GENE...")
+    for gene in GENES:
+        print(f"GENE {gene}")
+        response = client.talk(f"GENE {gene}")
+        print(response)
+        print()
+
+
+if __name__ == "__main__":
+    main()

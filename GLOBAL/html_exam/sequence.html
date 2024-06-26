@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sequence</title>
+    </head>
+    <body style="background-color: lavender">
+        <h1>ID: {{context.id}}  in species {{context.species}}/h1>
+        <p>Length: {context.id}}</p>
+        {% if context.even_bases %}
+        <p>Is even?: {{context.is_even}}</p>
+        {% else %}
+        <p>Is Odd?: {{not context.is_even}}</p>
+            {% endif %}
+        <textarea rows="50" cols="50">{{context.bases}}</textarea><br>
+        <p>
+            <a href="/">Main page</a>
+        </p>
+
+    </body>
+</html>

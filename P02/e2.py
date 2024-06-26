@@ -8,5 +8,5 @@ print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 IP = "212.128.255.17"
 PORT = 8081
 
-c = Client(IP, PORT)
-print(c)
+client_object = Client(IP, PORT)
+print(client_object)

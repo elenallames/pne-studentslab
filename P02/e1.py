@@ -11,7 +11,7 @@ IP = "212.128.255.17"  # the server IP address
 PORT = 8081
 
 # -- Create a client object
-c = Client(IP, PORT)
+client_object = Client(IP, PORT)
 
 # -- Test the ping method
-c.ping()
+client_object.ping()

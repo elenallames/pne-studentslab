@@ -6,13 +6,13 @@ PRACTICE = 1
 EXCERCISE = 10
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXCERCISE} |------")
-genes = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
+filenames = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
 
-for g in genes:
-    filename = os.path.join("..", "sequences", g + ".txt")
+for f in filenames:
+    filenames_genes = os.path.join("..", "sequences", f + ".txt")
     try:
-        s = Seq()
-        s.read_fasta(filename)
-        print(f"Gene {g}: Most frequent Base: {s.max_base()}")
+        sequence = Seq()
+        sequence.read_fasta(filenames_genes)
+        print(f"Gene {f}: Most frequent Base: {sequence.max_base()}")
     except FileNotFoundError:
-        print(f"[ERROR]: file ´{filename}´ not found")
+        print(f"[ERROR]: file ´{filenames_genes}´ not found")

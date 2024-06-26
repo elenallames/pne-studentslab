@@ -8,9 +8,9 @@ print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 IP = "192.168.0.33"
 PORT = 8081
 
-c = Client(IP, PORT)
-print(c)
+client_object = Client(IP, PORT)
+print(client_object)
 # --- Send a message to the server
 print("Sending a message to the server...")
-response = c.talk("Testing!!!")
+response = client_object.talk("Testing!!!")
 print(f"Response: {response}")

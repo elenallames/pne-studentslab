@@ -18,15 +18,15 @@ print(client_object)
 for g in FILENAMES:
     filename_genes = os.path.join("..", "sequences", g + ".txt")
     try:
-        s = Seq()  # s.__str__()
-        s.read_fasta(filename_genes)
+        sequence = Seq()
+        sequence.read_fasta(filename_genes)
 
         msg = f"Sending {g} Gene to the server..."
         print(f"To Server: {msg}")
         response = client_object.talk(msg)
         print(f"From Server: {response}")
 
-        msg = str(s)    # msg = f"{s}" / s.__str__()
+        msg = str(sequence)
         print(f"To Server: {msg}")
         response = client_object.talk(msg)
         print(f"From Server: {response}")

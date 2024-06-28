@@ -89,7 +89,6 @@ class MyHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         return contents, code
 
     def handle_operation(self, arguments):
-        """Handles the OPERATION operation."""
         try:
             bases = arguments['bases'][0]
             op = arguments['op'][0]

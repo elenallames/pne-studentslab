@@ -20,7 +20,7 @@ def seq_count_base(seq, bases):
     counts = {base: gene.count(base) for base in bases}
     print(f"Gene {seq}:")
     for base, count in counts.items():
-        print(f"   {base}: {count}")
+        print(f"{base}: {count}")
 
 def seq_count(seq):
     gene = seq_read_fasta(seq)
